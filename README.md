@@ -1,8 +1,8 @@
-# Projeto Kenzie Buster
+# Kenzie Buster Project
 
-Este é um projeto semanal que tem como objetivo desenvolver um sistema com Django e Django Rest Framework (DRF) para criar um sistema de gerenciamento de usuários e filmes. Neste README, forneceremos informações sobre as rotas, solicitações e respostas do sistema, bem como as tecnologias utilizadas.
+This is a weekly project aimed at developing a system using Django and Django Rest Framework (DRF) to create a user and movie management system. In this README, we provide information about the system's routes, requests, and responses, as well as the technologies used.
 
-## Tecnologias Utilizadas
+## Technologies Used
 
 [![Python](https://img.shields.io/badge/python-3.11.5-blue.svg)](https://www.python.org/)
 [![Django](https://img.shields.io/badge/django-4.2.6-green.svg)](https://www.djangoproject.com/)
@@ -10,33 +10,34 @@ Este é um projeto semanal que tem como objetivo desenvolver um sistema com Djan
 [![Django Rest Framework Simple JWT](https://img.shields.io/badge/djangorestframework--simplejwt-5.3.0-yellow.svg)](https://django-rest-framework-simplejwt.readthedocs.io/en/latest/)
 [![IPython](https://img.shields.io/badge/ipython-8.16.1-blueviolet.svg)](https://ipython.org/)
 
-## Estrutura do Projeto
+## Project Structure
 
-O projeto Kenzie Buster é estruturado em várias partes. A seguir, você encontrará informações sobre as principais funcionalidades do sistema.
+The Kenzie Buster project is structured into several parts. Below, you will find information about the system's main functionalities.
 
-### User Customizado
+### Custom User
 
-Nesta parte do projeto, criamos um aplicativo chamado "users" com um modelo personalizado de usuário que estende o `AbstractUser` do Django. Os principais atributos do modelo incluem:
+In this part of the project, we created an app called "users" with a custom user model that extends Django's `AbstractUser`. The model's key attributes include:
 
-- `email`: Uma string de e-mail única com no máximo 127 caracteres.
-- `first_name`: Uma string com no máximo 50 caracteres.
-- `last_name`: Uma string com no máximo 50 caracteres.
-- `birthdate`: Uma data (pode ser nulo e tem um valor padrão nulo).
-- `is_employee`: Um booleano com valor padrão falso.
+- `email`: A unique email string with a maximum of 127 characters.
+- `first_name`: A string with a maximum of 50 characters.
+- `last_name`: A string with a maximum of 50 characters.
+- `birthdate`: A date (can be null and has a default value of null).
+- `is_employee`: A boolean with a default value of false.
 
-Também foram definidos dois níveis de usuário: "employee" e "usuário comum", conforme a tabela a seguir:
+Two user levels were also defined: "employee" and "common user," as shown in the table below:
 
-| Tipo de Usuário | is_superuser | is_employee |
+| User Type       | is_superuser | is_employee |
 |-----------------|--------------|-------------|
-| Funcionário     | True         | True        |
-| Usuário Comum   | False        | False       |
+| Employee        | True         | True        |
+| Common User     | False        | False       |
 
-### Rotas
 
-#### Criação de Usuário
+### Routes
 
-- Rota: `POST /api/users/`
-- Corpo da Requisição:
+#### User Creation
+
+- Route: `POST /api/users/`
+- Request Body:
   ```json
   {
     "username": "lucira_buster",
@@ -48,7 +49,7 @@ Também foram definidos dois níveis de usuário: "employee" e "usuário comum",
     "is_employee": true
   }
   ```
-- Resposta (Status 201 CREATED):
+- Response (Status 201 CREATED):
   ```json
   {
     "id": 1,
@@ -62,17 +63,17 @@ Também foram definidos dois níveis de usuário: "employee" e "usuário comum",
   }
   ```
 
-#### Rota de Login
+#### Login Route
 
-- Rota: `POST /api/users/login/`
-- Corpo da Requisição:
+- Route: `POST /api/users/login/`
+- Request Body:
   ```json
   {
     "username": "lucira_buster",
     "password": "1234"
   }
   ```
-- Resposta (Status 200 OK):
+- Response (Status 200 CREATED):
   ```json
   {
     "refresh": "JWT REFRESH TOKEN...",
@@ -80,25 +81,25 @@ Também foram definidos dois níveis de usuário: "employee" e "usuário comum",
   }
   ```
 
-#### Rota de Listagem de Usuários
+#### User Listing Route
 
-- Rota: `GET /api/users/`
+- Route: `GET /api/users/`
 
-#### Rota de Detalhes de Usuário
+#### User Details Route
 
-- Rota: `GET /api/users/<int:user_id>/`
+- Route: `GET /api/users/<int:user_id>/`
 
-#### Rota de Atualização de Usuário
+#### User Update Route
 
-- Rota: `PATCH /api/users/<int:user_id>/`
-- Corpo da Requisição:
+- Route: `PATCH /api/users/<int:user_id>/`
+- Request Body:
   ```json
   {
     "email": "lucira_updated@kenziebuster.com",
     "first_name": "Lucira Updated"
   }
   ```
-- Resposta (Status 200 OK):
+- Response (Status 200 OK):
   ```json
   {
     "id": 1,
@@ -112,31 +113,31 @@ Também foram definidos dois níveis de usuário: "employee" e "usuário comum",
   }
   ```
 
-#### Rota de Exclusão de Usuário
+#### User Deletion Route
 
-- Rota: `DELETE /api/users/<int:user_id>/`
+- Route: `DELETE /api/users/<int:user_id>/`
 
 ### Movies
 
-Nesta parte do projeto, criamos um aplicativo chamado "movies" com um modelo "Movie" que permite que os usuários cadastrem filmes. Os atributos do modelo incluem:
+In this part of the project, we created an app called "movies" with a "Movie" model that allows users to register movies. The model's attributes include:
 
-- `title`: Uma string com no máximo 127 caracteres.
-- `duration`: Uma string com no máximo 10 caracteres (pode ser uma string vazia).
-- `rating`: Uma string com no máximo 20 caracteres, com opções "G," "PG," "PG-13," "R" ou "NC-17" (valor padrão: "G").
-- `synopsis`: Uma string sem limitação de caracteres (pode ser uma string vazia).
+- `title`: A string with a maximum of 127 characters.
+- `duration`: A string with a maximum of 10 characters (can be an empty string).
+- `rating`: A string with a maximum of 20 characters, with options "G," "PG," "PG-13," "R," or "NC-17" (default value: "G").
+- `synopsis`: A string with no character limit (can be an empty string).
 
-#### Serializador de Filmes
+#### Movie Serializer
 
-O serializador de filmes permite a criação, listagem, atualização e exclusão de filmes. Além dos campos básicos, o atributo "added_by" retorna apenas o e-mail do usuário que cadastrou o filme.
+The movie serializer allows the creation, listing, updating, and deletion of movies. In addition to the basic fields, the "added_by" attribute returns only the email of the user who registered the movie.
 
-#### Rota de Listagem de Filmes
+#### Movie Listing Route
 
-- Rota: `GET /api/movies/`
+- Route: `GET /api/movies/`
 
-#### Rota de Criação de Filmes
+#### Movie Creation Route
 
-- Rota: `POST /api/movies/`
-- Corpo da Requisição:
+- Route: `POST /api/movies/`
+- Request Body:
   ```json
   {
     "title": "Revolver",
@@ -145,7 +146,7 @@ O serializador de filmes permite a criação, listagem, atualização e exclusã
     "synopsis": "Jake Green is a hotshot gambler..."
   }
   ```
-- Resposta (Status 201 CREATED):
+- Response (Status 201 CREATED):
   ```json
   {
     "id": 1,
@@ -157,25 +158,25 @@ O serializador de filmes permite a criação, listagem, atualização e exclusã
   }
   ```
 
-#### Rota de Detalhes de Filmes
+#### Movie Details Route
 
-- Rota: `GET/api/movies/<int:movie_id>/`
+- Route: `GET /api/movies/<int:movie_id>/`
 
-#### Rota de Exclusão de Filmes
+#### Movie Deletion Route
 
-- Rota: `DELETE /api/movies/<int:movie_id>/`
+- Route: `DELETE /api/movies/<int:movie_id>/`
 
-#### Rota de Atualização de Filmes
+#### Movie Update Route
 
-- Rota: `PATCH /api/movies/<int:movie_id>/`
-- Corpo da Requisição:
+- Route: `PATCH /api/movies/<int:movie_id>/`
+- Request Body:
   ```json
   {
     "duration": "120min",
     "synopsis": "An updated synopsis."
   }
   ```
-- Resposta (Status 200 OK):
+- Response (Status 200 OK):
   ```json
   {
     "id": 1,
@@ -187,9 +188,10 @@ O serializador de filmes permite a criação, listagem, atualização e exclusã
   }
   ```
 
-### Tabela Pivô Customizada
+### Custom Pivot Table
 
-Nesta parte do projeto, criamos um aplicativo chamado "movies_orders" que contém um modelo chamado "MovieOrder." Este modelo inclui os seguintes atributos:
+In this part of the project, we created an app called "movies_orders" which contains a model called "MovieOrder." This model includes the following attributes:
 
-- `purchased_at`: Uma data e hora preenchida automaticamente pelo Django ao inserir o objeto no banco.
-- `price`: Um campo Decimal com no máximo 8 dígitos e 2 casas decimais.
+- `purchased_at`: A date and time automatically filled by Django when the object is inserted into the database.
+- `price`: A Decimal field with a maximum of 8 digits and 2 decimal places.
+
